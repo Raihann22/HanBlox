@@ -267,16 +267,19 @@ function buttonListener(HanBlox_Button, placeId) {
                     chrome.storage.local.get("recentServers", async function (results) {
                         let result = results.recentServers;
                         let theGameId;
-                        for (let x = 0; x < result.length; x++) {
-                            const theUserId = document.querySelectorAll('[name="user-data"]')[0].dataset.userid;
-                            if (result[x][theUserId]) {
-                                for (let y = 0; y < result[x][theUserId].length; y++) {
-                                    if (result[x][theUserId][y][placeId]) {
-                                        theGameId = result[x][theUserId][y][placeId];
-                                        y = result[x][theUserId].length;
+
+                        if (result) {
+                            for (let x = 0; x < result.length; x++) {
+                                const theUserId = document.querySelectorAll('[name="user-data"]')[0].dataset.userid;
+                                if (result[x][theUserId]) {
+                                    for (let y = 0; y < result[x][theUserId].length; y++) {
+                                        if (result[x][theUserId][y][placeId]) {
+                                            theGameId = result[x][theUserId][y][placeId];
+                                            y = result[x][theUserId].length;
+                                        }
                                     }
+                                    x = result.length;
                                 }
-                                x = result.length;
                             }
                         }
 
